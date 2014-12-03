@@ -37,8 +37,8 @@ class GoogleAuthenticator {
         
     }
     
-    public function getCode($secret,$time = null) {
-        
+    public function getCode($secret,$time = FALSE) {
+
         if (!$time) {
             $time = floor(time() / 30);
         }
@@ -66,7 +66,7 @@ class GoogleAuthenticator {
     public function getUrl($user, $hostname, $secret) {
         $url =  sprintf("otpauth://totp/%s@%s?secret=%s", $user, $hostname, $secret);
         $encoder = "https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=";
-        $encoderURL = sprintf( "%sotpauth://totp/%s@%s&secret=%s",$encoder, $user, $hostname, $secret);
+        $encoderURL = sprintf( "%sotpauth://totp/%s@%s?secret=%s",$encoder, $user, $hostname, $secret);
         
         return $encoderURL;
         
